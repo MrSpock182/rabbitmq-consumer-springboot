@@ -2,14 +2,31 @@ server:
   port: 8082
 spring:
   rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
     request:
-      host: localhost
-      port: 5672
-      username: guest
-      password: guest
       exchenge:
         producer: ex.producer.aula-spring
       routing-key:
         producer: rk.producer.aula-spring
-      deadletter:
+      dead-letter:
         producer: dl.producer.aula-spring
+      parking-lot:
+        producer: pl.producer.aula-spring
+    cache:
+      channel:
+        size: 10
+    listener:
+      time-retry: 43200000
+      simple:
+        concurrency: 1
+        max-concurrency: 1
+      direct:
+        retry:
+          enabled: true
+          initial-interval: 5000
+          max-attempts: 2
+          multiplier: 2
+          max-interval: 20000
