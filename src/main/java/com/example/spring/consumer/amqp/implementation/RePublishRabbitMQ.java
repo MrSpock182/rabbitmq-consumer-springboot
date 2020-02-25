@@ -12,9 +12,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 @Component
 public class RePublishRabbitMQ implements AmqpRePublish {
+
+    private final Logger log = Logger.getLogger(RePublishRabbitMQ.class.getName());
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
@@ -50,10 +53,10 @@ public class RePublishRabbitMQ implements AmqpRePublish {
                 headers.put(X_RETRIES_HEADER, retriesHeader + 1);
                 this.rabbitTemplate.send(exchange, queue, message);
 
-                System.out.println("Tentou:" + retriesHeader + " - Date: " + new Date());
+                log.info("Tentou:" + retriesHeader + " - Date: " + new Date());
             } else {
                 this.rabbitTemplate.send(parkingLot, message);
-                System.out.println("Enviou para parkinglot - Date: " + new Date());
+                log.info("Enviou para parkinglot - Date: " + new Date());
             }
         });
     }

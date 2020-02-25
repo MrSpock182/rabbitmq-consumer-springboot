@@ -5,8 +5,12 @@ import com.example.spring.consumer.service.ConsumerService;
 import org.springframework.amqp.AmqpRejectAndDontRequeueException;
 import org.springframework.stereotype.Service;
 
+import java.util.logging.Logger;
+
 @Service
 public class ConsumerServiceImpl implements ConsumerService {
+
+    private final Logger log = Logger.getLogger(ConsumerServiceImpl.class.getName());
 
     @Override
     public void action(MessageQueue message) {
@@ -14,6 +18,6 @@ public class ConsumerServiceImpl implements ConsumerService {
             throw new AmqpRejectAndDontRequeueException("Erro");
         }
 
-        System.out.println(message.getText());
+        log.info(message.getText());
     }
 }
