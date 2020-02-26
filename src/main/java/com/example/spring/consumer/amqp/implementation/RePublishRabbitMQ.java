@@ -37,7 +37,7 @@ public class RePublishRabbitMQ implements AmqpRePublish {
     private static final String X_RETRIES_HEADER = "x-retries";
 
     @Override
-    @Scheduled(fixedDelayString = "${spring.rabbitmq.listener.time-retry}")
+    @Scheduled(cron = "${spring.rabbitmq.listener.time-retry}")
     public void rePublish() {
         List<Message> list = getQueueMessages();
 

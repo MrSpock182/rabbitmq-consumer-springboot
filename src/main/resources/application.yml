@@ -19,7 +19,7 @@ spring:
       channel:
         size: 10
     listener:
-      time-retry: 43200000
+      time-retry: 00 12 12 * * *
       simple:
         concurrency: 1
         max-concurrency: 1
