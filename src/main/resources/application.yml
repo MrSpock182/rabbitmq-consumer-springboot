@@ -16,4 +16,4 @@ spring:
       parking-lot:
         producer: pl.producer.aula-spring
     listener:
-      time-retry: 00 42 21 * * *
+      time-retry: 00 39 22 * * *
